@@ -18,6 +18,10 @@ const Maze = () => {
 
     }
 
+    const solveMaze = () =>{
+        
+    }
+
     return ( 
         <div className="wrapper">
             <div className="maze-wrapper">
@@ -26,7 +30,7 @@ const Maze = () => {
             ))}
             
             </div>
-        <button className = 'btn'>SOLVE</button>
+        <button onClick={solveMaze} className = 'btn'>SOLVE</button>
         </div>
      );
 }
