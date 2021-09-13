@@ -19,11 +19,14 @@ const Maze = () => {
     }
 
     return ( 
-        <div className="maze-wrapper">
-        {maze.map(num=>(
-            <div className="box-wrapper" onClick ={handleClick} key = {num}>{num}</div>
-        ))}
-
+        <div className="wrapper">
+            <div className="maze-wrapper">
+            {maze.map(num=>(
+                <div className="box-wrapper" onClick ={handleClick} key = {num}>{num}</div>
+            ))}
+            
+            </div>
+        <button className = 'btn'>SOLVE</button>
         </div>
      );
 }
