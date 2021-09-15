@@ -13,7 +13,10 @@ const Maze = () => {
 
     const handleClick = (event) =>{//when clicked removes the item from the array
         event.target.style.backgroundColor = "rgb(173, 106, 173)";
-        maze.splice(maze.indexOf(parseInt(event.target.innerHTML)),1)
+        if (maze.includes(parseInt(event.target.innerHTML))){
+            maze.splice(maze.indexOf(parseInt(event.target.innerHTML)),1)
+        }
+        console.log(event.target.innerHTML)
         console.log(maze)
 
     }
@@ -28,7 +31,7 @@ const Maze = () => {
     const getNumPosition=(row, col)=>{//this cuntion has not been checked
         let s = ''
         s += row
-        s += row;
+        s += col;
         let num = parseInt(s)
         return num;
         
@@ -38,38 +41,47 @@ const Maze = () => {
     const solveMaze = () =>{
         let path = []
         //let col = 0,row = 0;
-        let current = maze.pop();
+        let solveMaze = maze.reverse();
+        let current = solveMaze.pop();
+        console.log(current)
 
         while(current !== 99){
-            console.log('currently looking at block: '+current)
+            console.log('currently looking at: '+current)
             //check if the squares surrounding current are in the maze. example. if we're at sqr 23 to check the top would be row 1 col 13. this is sqr 13. concatenate them
             let row = (calcPosition(current).row)
             let col = (calcPosition(current).col)
+            console.log('this is row : '+ row+ ' | this is col: '+ col)
 
             //check if the sqrs around the current is in the available moves 
-            if(maze.indexOf(getNumPosition(row+1,col)) !== -1){//move up one 
+            if(solveMaze.indexOf(getNumPosition(row+1,col)) !== -1){//move up one 
+                console.log(getNumPosition(row+1,col))
+                console.log(solveMaze.indexOf(getNumPosition(row+1,col)))
+                console.log('it is happening here 0')
                 path.push(current);
                 current = getNumPosition(row+1,col);
                 //remove if condition from the maze array 
-                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
-            }else if (maze.indexOf(getNumPosition(row-1,col)) !== -1){//mpvve down one 
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (solveMaze.indexOf(getNumPosition(row-1,col)) !== -1){//mpvve down one 
+                console.log('it is happening here 1')
                 path.push(current);
                 current = getNumPosition(row-1,col);
-                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
-            }else if (maze.indexOf(getNumPosition(row,col+1)) !== -1){//mpvve down one 
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (solveMaze.indexOf(getNumPosition(row,col+1)) !== -1){//mpvve down one 
+                console.log('it is happening here 2')
                 path.push(current);
                 current = getNumPosition(row,col+1);
-                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
-            }else if (maze.indexOf(getNumPosition(row,col-1)) !== -1){//mpvve down one 
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (solveMaze.indexOf(getNumPosition(row,col-1)) !== -1){//mpvve down one 
+                console.log('it is happening here 3')
                 path.push(current);
                 current = getNumPosition(row,col-1);
-                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
             }else{
-                current = maze.pop();
+                current = solveMaze.pop();
             }
 
         }
-        
+        console.log(path)
     }
 
     return ( 
