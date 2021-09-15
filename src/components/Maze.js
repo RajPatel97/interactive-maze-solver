@@ -27,8 +27,8 @@ const Maze = () => {
 
     const getNumPosition=(row, col)=>{//this cuntion has not been checked
         let s = ''
-        s.append(row)
-        s.append(row)
+        s += row
+        s += row;
         let num = parseInt(s)
         return num;
         
@@ -37,15 +37,36 @@ const Maze = () => {
 
     const solveMaze = () =>{
         let path = []
-        let col = 0,row = 0;
+        //let col = 0,row = 0;
         let current = maze.pop();
 
-        while(current != 99){
+        while(current !== 99){
+            console.log('currently looking at block: '+current)
             //check if the squares surrounding current are in the maze. example. if we're at sqr 23 to check the top would be row 1 col 13. this is sqr 13. concatenate them
             let row = (calcPosition(current).row)
             let col = (calcPosition(current).col)
 
-
+            //check if the sqrs around the current is in the available moves 
+            if(maze.indexOf(getNumPosition(row+1,col)) !== -1){//move up one 
+                path.push(current);
+                current = getNumPosition(row+1,col);
+                //remove if condition from the maze array 
+                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (maze.indexOf(getNumPosition(row-1,col)) !== -1){//mpvve down one 
+                path.push(current);
+                current = getNumPosition(row-1,col);
+                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (maze.indexOf(getNumPosition(row,col+1)) !== -1){//mpvve down one 
+                path.push(current);
+                current = getNumPosition(row,col+1);
+                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
+            }else if (maze.indexOf(getNumPosition(row,col-1)) !== -1){//mpvve down one 
+                path.push(current);
+                current = getNumPosition(row,col-1);
+                maze.splice(maze.indexOf(getNumPosition(row+1,col)), 1);
+            }else{
+                current = maze.pop();
+            }
 
         }
         
