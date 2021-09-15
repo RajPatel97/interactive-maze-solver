@@ -18,7 +18,36 @@ const Maze = () => {
 
     }
 
+    const calcPosition =(num)=>{//calcumation the row and the col of a givin posion in the maze. ex 23 would calulate to row = 2, col = 3.
+        let row = Math.floor(num /10) ;
+        let col = num%10;
+        return {row,col};
+
+    }
+
+    const getNumPosition=(row, col)=>{//this cuntion has not been checked
+        let s = ''
+        s.append(row)
+        s.append(row)
+        let num = parseInt(s)
+        return num;
+        
+
+    }
+
     const solveMaze = () =>{
+        let path = []
+        let col = 0,row = 0;
+        let current = maze.pop();
+
+        while(current != 99){
+            //check if the squares surrounding current are in the maze. example. if we're at sqr 23 to check the top would be row 1 col 13. this is sqr 13. concatenate them
+            let row = (calcPosition(current).row)
+            let col = (calcPosition(current).col)
+
+
+
+        }
         
     }
 
