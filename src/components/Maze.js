@@ -57,28 +57,30 @@ const Maze = () => {
                 console.log(getNumPosition(row+1,col))
                 console.log(solveMaze.indexOf(getNumPosition(row+1,col)))
                 console.log('it is happening here 0')
-                path.push(current);
+                //path.push(current);
                 current = getNumPosition(row+1,col);
                 //remove if condition from the maze array 
                 solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
             }else if (solveMaze.indexOf(getNumPosition(row-1,col)) !== -1){//mpvve down one 
                 console.log('it is happening here 1')
-                path.push(current);
+                //path.push(current);
                 current = getNumPosition(row-1,col);
-                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row-1,col)), 1);
             }else if (solveMaze.indexOf(getNumPosition(row,col+1)) !== -1){//mpvve down one 
                 console.log('it is happening here 2')
-                path.push(current);
+                //path.push(current);
                 current = getNumPosition(row,col+1);
-                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row,col+1)), 1);
             }else if (solveMaze.indexOf(getNumPosition(row,col-1)) !== -1){//mpvve down one 
                 console.log('it is happening here 3')
-                path.push(current);
+                //path.push(current);
                 current = getNumPosition(row,col-1);
-                solveMaze.splice(solveMaze.indexOf(getNumPosition(row+1,col)), 1);
+                solveMaze.splice(solveMaze.indexOf(getNumPosition(row,col-1)), 1);
             }else{
-                current = solveMaze.pop();
+                path.pop();
+                current = path.pop();
             }
+            path.push(current);
 
         }
         console.log(path)
@@ -88,7 +90,7 @@ const Maze = () => {
         <div className="wrapper">
             <div className="maze-wrapper">
             {maze.map(num=>(
-                <div className="box-wrapper" onClick ={handleClick} key = {num}>{num}</div>
+                <div id ={num} className="box-wrapper" onMouseOver = {handleClick} onClick ={handleClick} key = {num}>{num}</div>
             ))}
             
             </div>
