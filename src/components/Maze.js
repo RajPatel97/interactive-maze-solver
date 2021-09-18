@@ -1,14 +1,31 @@
 
 const Maze = () => {
     let maze =[];
-    const hello = (n)=>{
+
+    let presetMazeOne = [];//these would be mazes with moves that are not available 
+    let presetMazetwo = [];
+    let presetMazeThree = [];
+    let presetMazeFour = [];
+
+    const handlePresetMaze = (maze) =>{//crating an array of available moves 
+        let mazeNumber = maze;
+        mazeNumber.array.forEach(element => {
+            let temp = document.getElementById(element);
+            temp.style.backgroundColor = "putrple"
+            mazeNumber.splice(mazeNumber.indexOf(element),1);
+        });
+
+        solveMaze();
+    }
+
+    const init= (n)=>{
         for(let x=0; x<n; x++){
             maze.push(x)
         }
     
     }
 
-    hello(100)
+    init(100)
 
     const handleClick = (event) =>{//when clicked removes the item from the array
         event.target.style.backgroundColor = "rgb(173, 106, 173)";
